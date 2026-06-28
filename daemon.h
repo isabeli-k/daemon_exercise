@@ -2,11 +2,11 @@
 #define DAEMON_H
 
 // Flags
-#define BD_NO_UMASK0            0x01
-#define BD_NO_CHDIR             0x02
-#define BD_NO_CLOSE_FILES       0x04
-#define BD_NO_REOPEN_STD_FDS    0x08
-#define BD_MAX_CLOSE            8192
+#define NO_UMASK0            0x01
+#define NO_CHDIR             0x02
+#define NO_CLOSE_FILES       0x04
+#define NO_REOPEN_SFDS	     0x08
+#define MAX_CLOSE            0x2000
 
 // Daemon statuses
 typedef enum {

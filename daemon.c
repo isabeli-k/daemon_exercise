@@ -30,10 +30,10 @@ int start_daemon(int flags) {
 	if(process_fork() == -1)
 		return DAEMON_ERROR_FORK;
 
-	if(!(flags & BD_NO_UMASK0))
+	if(!(flags & NO_UMASK0))
 		umask(0);
 	
-	if(!(flags & BD_NO_CHDIR)) {
+	if(!(flags & NO_CHDIR)) {
 		if (chdir("/") == -1)
 			return DAEMON_ERROR_CHDIR;
 	}
@@ -41,17 +41,17 @@ int start_daemon(int flags) {
 	long max_open_files;
 	int fd;
 	
-	if(!(flags & BD_NO_CLOSE_FILES)) {
+	if(!(flags & NO_CLOSE_FILES)) {
 		max_open_files = sysconf(_SC_OPEN_MAX);
 		
 		if(max_open_files == -1)
-			max_open_files = BD_MAX_CLOSE;
+			max_open_files = MAX_CLOSE;
 		
 		for(fd = 0; fd < max_open_files; fd++)
 			close(fd);
 	}
 
-	if(!(flags & BD_NO_REOPEN_STD_FDS)) {
+	if(!(flags & NO_REOPEN_SFDS)) {
 		fd = open("/dev/null", O_RDWR);
 		
 		if(fd != STDIN_FILENO)
